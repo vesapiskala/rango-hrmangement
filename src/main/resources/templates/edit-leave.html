@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Leave</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Edit Leave</h1>
+  <form th:action="@{/leaves/update/{id}(id=${leave.id})}" method="post">
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="date" class="form-control" id="startDate" name="startDate" th:value="${leave.startDate}" required>
+    </div>
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" class="form-control" id="endDate" name="endDate" th:value="${leave.endDate}" required>
+    </div>
+    <div class="form-group">
+      <label for="reason">Reason</label>
+      <input type="text" class="form-control" id="reason" name="reason" th:value="${leave.reason}" required>
+    </div>
+    <div class="form-group">
+      <label for="leaveType">Leave Type</label>
+      <select class="form-control" id="leaveType" name="leaveType" required>
+        <option th:each="type : ${T(org.example.rangohrmangement.enums.LeaveType).values()}"
+                th:value="${type}"
+                th:text="${type}"
+                th:selected="${leave.leaveType == type}"></option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="employeeId">Employee</label>
+      <select class="form-control" id="employeeId" name="employeeId" required>
+        <option th:each="employee : ${employees}"
+                th:value="${employee.id}"
+                th:text="${employee.firstName + ' ' + employee.lastName}"
+                th:selected="${leave.employee.id == employee.id}"></option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Leave</button>
+  </form>
+</div>
+</body>
+</html>

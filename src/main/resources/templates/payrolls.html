@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Payrolls</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="~{header :: header}"></div>
+<div class="container">
+  <h1>Payrolls</h1>
+  <form th:action="@{/payrolls/add}" method="post" th:object="${payrollDTO}">
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <input type="number" class="form-control" id="amount" th:field="*{amount}" required>
+    </div>
+    <div class="form-group">
+      <label for="paymentDate">Payment Date</label>
+      <input type="date" class="form-control" id="paymentDate" th:field="*{paymentDate}" required>
+    </div>
+    <div class="form-group">
+      <label for="employeeId">Employee</label>
+      <select class="form-control" id="employeeId" th:field="*{employeeId}" required>
+        <option value="">Select Employee</option>
+        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.firstName + ' ' + employee.lastName}"></option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Payroll</button>
+  </form>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Amount</th>
+      <th>Payment Date</th>
+      <th>Employee</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="payroll : ${payrolls}">
+      <td th:text="${payroll.id}"></td>
+      <td th:text="${payroll.amount}"></td>
+      <td th:text="${payroll.paymentDate}"></td>
+      <td th:text="${payroll.employee.firstName + ' ' + payroll.employee.lastName}"></td>
+      <td>
+        <a th:href="@{/payrolls/edit/{id}(id=${payroll.id})}" class="btn btn-warning btn-sm">Edit</a>
+        <a th:href="@{/payrolls/delete/{id}(id=${payroll.id})}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

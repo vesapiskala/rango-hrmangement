@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home - HR Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .jumbotron {
+            background-color: #fff;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{header :: header}"></div>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Mirësevini, <span th:text="${#authentication.name}"></span>!</h1>
+        <p class="lead">Ju jeni të kyçur në sistemin e menaxhimit të burimeve njerëzore.</p>
+        <hr class="my-4">
+        <p>Përdorni butonat e mëposhtëm për të naviguar nëpër sistem:</p>
+        <a th:href="@{/departments}" class="btn btn-primary btn-lg btn-custom">Departamentet</a>
+        <a th:href="@{/employees}" class="btn btn-success btn-lg btn-custom">Punonjësit</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
